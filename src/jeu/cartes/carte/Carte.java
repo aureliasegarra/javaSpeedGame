@@ -4,9 +4,9 @@ import java.awt.Color;
 
 public class Carte {
 	
-	private static final int NBR_COULEURS = 5;
-	private static final int NBR_MOTIFS = 5;
-	private static final int NBR_VALEURS = 5;
+	public static final int NBR_COULEURS = 5;
+	public static final int NBR_MOTIFS = 5;
+	public static final int NBR_VALEURS = 5;
 	
 	private Color couleur;
 	private Symbole motif;
