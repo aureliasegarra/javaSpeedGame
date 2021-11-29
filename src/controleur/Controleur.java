@@ -6,6 +6,9 @@ import java.awt.event.KeyListener;
 
 import ihm.FenetreHote;
 import ihm.Touches;
+import jeu.Joueur;
+import jeu.cartes.PaquetCarte;
+import jeu.cartes.carte.Carte;
 
 
 
@@ -42,9 +45,9 @@ public class Controleur implements KeyListener {
 	public Controleur() {		
 		super();
 		PaquetCarte pc = new PaquetCarte();
-		joueur1 = new Joueur("joueur 1",pc);
+		joueur1 = new Joueur("joueur 1",pc,0);
 		PaquetCarte pc2 =new PaquetCarte(pc, pc.size()/2);
-		joueur2 = new Joueur("joueur 2", pc2);
+		joueur2 = new Joueur("joueur 2", pc2,0);
 
 		sommet1=joueur1.remove(0);
 		sommet2=joueur2.remove(0);

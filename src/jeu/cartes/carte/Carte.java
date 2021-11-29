@@ -2,6 +2,8 @@ package jeu.cartes.carte;
 
 import java.awt.Color;
 
+import jeu.Joueur;
+
 public class Carte {
 	
 	public static final int NBR_COULEURS = 5;
@@ -14,8 +16,50 @@ public class Carte {
 	
 	
 	
+	public Carte() {
+		super();
+		forcerCarteVide();
+		
+	}
 	
 
+	
+	public Carte(int valeur,int couleur, int motif) {
+		super();
+		if(valeur>=1 && valeur <= NBR_VALEURS) {
+			if (couleur >= 1 && couleur<=NBR_COULEURS) {
+				this.valeur = valeur;
+				this.couleur = Carte.getColor(couleur);
+				this.motif = Symbole.get(motif);
+			}
+			else {
+				System.out.println("PROBLEME COULEUR");
+				forcerCarteVide();
+			}}
+		else {
+			System.out.println("PROBLEME VALEUR");
+			forcerCarteVide();
+		}
+	}
+	
+	@SuppressWarnings("unused")
+	private Carte(int valeur,int couleur, Symbole motif) {
+		super();
+		if(valeur>=1 && valeur <= NBR_VALEURS) {
+			if (couleur >= 1 && couleur<=NBR_COULEURS) {
+				this.valeur = valeur;
+				this.couleur = Carte.getColor(couleur);
+				this.motif = motif;
+			}
+			else {
+				System.out.println("PROBLEME COULEUR");
+				forcerCarteVide();
+			}}
+		else {
+			System.out.println("PROBLEME VALEUR");
+			forcerCarteVide();
+		}
+	}
 	
 	/**
 	 * @return the nbrCouleurs
@@ -62,24 +106,23 @@ public class Carte {
 		return valeur;
 	}
 
-	public Carte() {
-		super();
-		forcerCarteVide();
-		
-	}
-	
-	public Carte(int valeur, int couleur, Symbole motif) {
-		super();
-		if (couleur<1 || couleur>NBR_COULEURS || valeur<1 || valeur>NBR_VALEURS) {
-			System.out.println("Erreur de création de carte");
-			forcerCarteVide();
+	public boolean estCompatible(Carte c2) {
+		boolean compatible=true;
+		if (this.isVide() || c2.isVide()) {
+			compatible=false;
 		}
 		else {
-			this.couleur = Carte.getColor(couleur);
-			this.motif = motif;
-			this.valeur = valeur;
+			if(!this.couleur.equals(c2.couleur) 
+				&& this.valeur!=c2.valeur 
+				&&!this.motif.equals(c2.motif)) {
+				compatible=false;
+			}
 		}
-		
+		return compatible;
+	}
+
+	public boolean isVide() {
+		return this.valeur==-1 && this.motif==Symbole.VIDE && this.couleur==Color.DARK_GRAY;
 	}
 
 
@@ -104,16 +147,11 @@ public class Carte {
 		}
 		return coul;
 	}
-
+    
 
 	@Override
 	public String toString() {
 		return "Carte [couleur=" + couleur + ", motif=" + motif + ", valeur=" + valeur + "]";
 	}
-	
-	
-	
-	
-
 	
 }
